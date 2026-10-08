@@ -1,14 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>oli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --px: 4px;          /* one pixel of the art */
+            --ink: #2b2b2b;     /* frame and first heading */
+            --gray: #707070;    /* second heading */
+            --shade: #d4d4d4;   /* hard pixel shadows */
+            --spark: #bdbdbd;   /* sparkles */
+            --grid: #efefef;    /* background grid lines */
+            --paper: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: 32px 16px;
+            background-color: var(--paper);
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 16px 16px;
+            color: var(--ink);
+            font-family: "Press Start 2P", monospace;
+            -webkit-font-smoothing: none;
+        }
+
+        /* White card with a notched pixel border and a stepped gray drop shadow */
+        .card {
+            position: relative;
+            padding: 56px 20px;
+            background: var(--paper);
+            text-align: center;
+            box-shadow:
+                calc(var(--px) * -1) 0 0 0 var(--ink),
+                var(--px) 0 0 0 var(--ink),
+                0 calc(var(--px) * -1) 0 0 var(--ink),
+                0 var(--px) 0 0 var(--ink),
+                calc(var(--px) * 3) calc(var(--px) * 2) 0 0 var(--shade),
+                calc(var(--px) * 2) calc(var(--px) * 3) 0 0 var(--shade),
+                calc(var(--px) * 2) var(--px) 0 0 var(--shade),
+                var(--px) calc(var(--px) * 2) 0 0 var(--shade);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;    /* multiples of 8 keep the font crisp */
+            font-weight: 400;
+            line-height: 1.5;
+            text-shadow: 0.125em 0.125em 0 var(--shade);
+        }
+
+        h1 + h1 {
+            margin-top: 0.75em;
+            color: var(--gray);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 0.625em;
+            height: 0.875em;
+            margin-left: 0.25em;
+            vertical-align: -0.0625em;
+            background: currentColor;
+            box-shadow: 0.125em 0.125em 0 var(--shade);
+            animation: blink 1s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            50% { visibility: hidden; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            color: var(--spark);
+        }
+
+        .sparkle.top { top: 14px; right: 14px; }
+        .sparkle.bottom { bottom: 14px; left: 14px; }
+
+        @media (max-width: 359px) {
+            h1 { font-size: 16px; }
+        }
+
+        @media (min-width: 640px) {
+            .card { padding: 72px 64px; }
+            h1 { font-size: 40px; }
+        }
+
+        @media (min-width: 960px) {
+            h1 { font-size: 48px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor { animation: none; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Oli's Page</h1>
-    <p>This is a simple webpage created by oli.</p>
-    
-
+    <main class="card">
+        <svg class="sparkle top" viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true">
+            <path fill="currentColor" d="M3 0h1v2H3zM0 3h2v1H0zM3 3h1v1H3zM5 3h2v1H5zM3 5h1v2H3z"/>
+        </svg>
+        <h1>hola món</h1>
+        <h1>jo soc oli<span class="cursor" aria-hidden="true"></span></h1>
+        <svg class="sparkle bottom" viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true">
+            <path fill="currentColor" d="M3 0h1v2H3zM0 3h2v1H0zM3 3h1v1H3zM5 3h2v1H5zM3 5h1v2H3z"/>
+        </svg>
+    </main>
 </body>
 </html>
